@@ -1,0 +1,26 @@
+.video-player {
+    margin: 20px 0;
+  }
+  
+  .video-player video {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .video-details {
+    margin-top: 15px;
+  }
+  
+  .video-details h2 {
+    font-size: 24px;
+    margin: 0 0 10px 0;
+    color: #333;
+  }
+  
+  .video-details p {
+    font-size: 16px;
+    color: #666;
+  }
+  

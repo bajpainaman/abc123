@@ -1,0 +1,40 @@
+.video-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between video items */
+    max-height: 600px;
+    overflow-y: auto; /* Scroll if the list is too long */
+    padding: 10px;
+    border-left: 2px solid #e0e0e0; /* Optional border for separation */
+  }
+  
+  .video-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .video-item:hover {
+    background-color: #f1f1f1; /* Highlight the video on hover */
+  }
+  
+  .video-item img {
+    border-radius: 5px;
+    margin-right: 15px;
+    width: 150px;
+    height: 85px;
+    object-fit: cover; /* Ensures the thumbnail fits nicely */
+  }
+  
+  .video-item h3 {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+    text-align: left;
+  }
+  
+  .video-item:hover h3 {
+    color: #0073e6; /* Change text color on hover */
+  }
+  
