@@ -1,17 +1,32 @@
-import React from 'react';
-import './VideoList.css';
+// components/VideoList.js
 
-const VideoList = ({ videos, onVideoSelect }) => {
+import React from 'react';
+import './VideoList.css'; // Import the CSS file
+
+function VideoList({ videos, onVideoSelect }) {
   return (
-    <div className="video-list-container">
+    <div className="video-list">
+      <h3>Up next</h3>
       {videos.map((video) => (
-        <div key={video.id} className="video-item" onClick={() => onVideoSelect(video)}> {/* Click event to select the video */}
-          <img src={video.thumbnail || 'default-thumbnail.jpg'} alt={video.name} width="150" />
-          <h3>{video.name}</h3>
+        <div
+          key={video.id}
+          onClick={() => onVideoSelect(video)}
+          className="video-item"
+        >
+          <img
+            src={video.thumbnail || 'https://via.placeholder.com/168x94'}
+            alt={video.name}
+            className="video-thumbnail"
+          />
+          <div className="video-info">
+            <p className="video-title">{video.name}</p>
+            <p className="video-channel">Channel Name</p>
+            <p className="video-views">{video.views} views</p>
+          </div>
         </div>
       ))}
     </div>
   );
-};
+}
 
 export default VideoList;

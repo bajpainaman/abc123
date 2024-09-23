@@ -1,24 +1,36 @@
+// components/VideoPlayer.js
+
 import React from 'react';
-import Loader from './Loader';
 import './VideoPlayer.css';
 
-const VideoPlayer = ({ video }) => {
+function VideoPlayer({ video }) {
   if (!video) {
-    return <Loader />;
+    return <div className="video-player">Select a video to play</div>;
   }
 
   return (
     <div className="video-player">
-      <video width="100%" height="auto" controls autoPlay>
-        <source src={video.videoURL} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      <video
+        key={video.id}
+        src={video.videoURL}
+        controls
+        autoPlay
+        poster={video.thumbnail}
+      />
       <div className="video-details">
-        <h2>{video.name}</h2>
-        <p>{video.description}</p>
+        <h2 className="video-title">{video.name}</h2>
+        <p className="video-views">{video.views} views • {video.uploadDate}</p>
+        <div className="video-actions">
+          <button className="action-button">👍 Like</button>
+          <button className="action-button">👎 Dislike</button>
+          <button className="action-button">🔗 Share</button>
+          <button className="action-button">💾 Save</button>
+        </div>
+        <hr />
+        <p className="video-description">{video.description}</p>
       </div>
     </div>
   );
-};
+}
 
 export default VideoPlayer;

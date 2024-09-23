@@ -1,26 +1,65 @@
+/* components/VideoPlayer.css */
+
 .video-player {
-    margin: 20px 0;
-  }
-  
-  .video-player video {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .video-details {
-    margin-top: 15px;
-  }
-  
-  .video-details h2 {
-    font-size: 24px;
-    margin: 0 0 10px 0;
-    color: #333;
-  }
-  
-  .video-details p {
-    font-size: 16px;
-    color: #666;
-  }
-  
+  width: 100%;
+}
+
+.video-player video {
+  width: 100%;
+  height: auto;
+  background-color: #000;
+}
+
+.video-details {
+  margin-top: 15px;
+  color: #ffffff;
+}
+
+.video-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  color: #ffffff;
+}
+
+.video-views {
+  font-size: 14px;
+  color: #b3b3b3;
+  margin: 5px 0;
+}
+
+.video-actions {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.action-button {
+  background: none;
+  border: none;
+  margin-right: 15px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #b3b3b3;
+  display: flex;
+  align-items: center;
+}
+
+.action-button:hover {
+  color: #ffffff;
+}
+
+.action-button i {
+  margin-right: 5px;
+}
+
+.hr {
+  border: 0.5px solid #333333;
+  margin: 15px 0;
+}
+
+.video-description {
+  font-size: 14px;
+  color: #d1d1d1;
+  line-height: 1.6;
+}

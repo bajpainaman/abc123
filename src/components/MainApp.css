@@ -1,0 +1,72 @@
+/* components/MainApp.css */
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  .main-app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e5e5e5;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .navigation h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #ff0000; /* YouTube red color */
+  }
+  
+  .nav-links {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-links a,
+  .nav-links button {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #606060;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .nav-links a:hover,
+  .nav-links button:hover {
+    color: #000;
+  }
+  
+  .content {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+  }
+  
+  .video-player-container {
+    flex: 3;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  .video-list-container {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+  }
+  
