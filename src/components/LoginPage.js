@@ -1,6 +1,9 @@
+// components/LoginPage.js
+
 import React, { useState } from 'react';
 import { signup, signin } from '../Auth';
 import './LoginPage.css';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -8,6 +11,7 @@ function LoginPage() {
   const [error, setError] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,12 +26,13 @@ function LoginPage() {
 
     try {
       if (isSignUp) {
-        await signup(email, password);
-        // Instead of alert, display a message or redirect
-        setError('Signup successful! Please verify your email before logging in.');
+        const user = await signup(email, password);
+        // Redirect to profile form
+        navigate('/profile', { state: { user } });
       } else {
         await signin(email, password);
         // Redirect user to the main app if sign-in is successful
+        navigate('/main');
       }
     } catch (err) {
       setError(err.message);

@@ -1,20 +1,45 @@
 // components/MainApp.js
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { logout } from '../Auth';
-import { db } from '../Firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { auth, db } from '../Firebase';
+import { collection, getDocs, doc, updateDoc, Timestamp } from 'firebase/firestore';
 
 import VideoPlayer from './VideoPlayer';
 import VideoList from './VideoList';
 import Loader from './Loader';
-import { Link } from 'react-router-dom';
-import './MainApp.css'; // Import the CSS file
+import { Link, useNavigate } from 'react-router-dom';
+import './MainApp.css';
 
-function MainApp({ user }) {
+function MainApp() {
   const [videos, setVideos] = useState([]);
   const [currentVideo, setCurrentVideo] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  // Fetch the current authenticated user
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+
+        // Update LastSeen when user is authenticated
+        const userRef = doc(db, 'students', currentUser.uid);
+        try {
+          await updateDoc(userRef, {
+            LastSeen: Timestamp.now(),
+          });
+        } catch (error) {
+          console.error('Error updating LastSeen:', error);
+        }
+      } else {
+        // If not authenticated, redirect to login
+        navigate('/');
+      }
+    });
+
+    return () => unsubscribe();
+  }, [navigate]);
 
   // Fetch videos from Firestore
   const fetchVideos = useCallback(async () => {
@@ -41,6 +66,8 @@ function MainApp({ user }) {
               videoURL: data.link,
               thumbnail: data.img, // Include the thumbnail image URL
               views: data.Views || 0,
+              likes: data.likes || 0,
+              dislikes: data.dislikes || 0,
             };
           } else {
             console.error('No link found in the document:', doc.id);
@@ -73,6 +100,7 @@ function MainApp({ user }) {
 
   const handleLogout = async () => {
     await logout();
+    navigate('/');
   };
 
   return (
@@ -81,13 +109,16 @@ function MainApp({ user }) {
         <h1>LearnryFi</h1>
         <div className="nav-links">
           <Link to="/">Home</Link>
-          <Link to="/upload">Upload Video</Link>
           <button onClick={handleLogout}>Logout</button>
         </div>
       </nav>
       <div className="content">
         <div className="video-player-container">
-          {loading ? <Loader /> : <VideoPlayer video={currentVideo} />}
+          {loading ? (
+            <Loader />
+          ) : (
+            <VideoPlayer video={currentVideo} user={user} />
+          )}
         </div>
         <div className="video-list-container">
           <VideoList videos={videos} onVideoSelect={handleVideoSelect} />

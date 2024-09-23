@@ -12,19 +12,21 @@
 
 .video-details {
   margin-top: 15px;
-  color: #ffffff;
+  background-color: #ffffff; /* Changed background to white */
+  padding: 15px;
+  color: #000000; /* Set text color to black */
 }
 
 .video-title {
   font-size: 18px;
   font-weight: 500;
   margin: 0;
-  color: #ffffff;
+  color: #000000; /* Changed to black */
 }
 
 .video-views {
   font-size: 14px;
-  color: #b3b3b3;
+  color: #333333; /* Dark gray */
   margin: 5px 0;
 }
 
@@ -38,28 +40,30 @@
   background: none;
   border: none;
   margin-right: 15px;
-  font-size: 14px;
+  font-size: 24px;
   cursor: pointer;
-  color: #b3b3b3;
-  display: flex;
-  align-items: center;
+  color: #333333;
+  padding: 8px;
 }
 
 .action-button:hover {
-  color: #ffffff;
-}
-
-.action-button i {
-  margin-right: 5px;
+  color: #000000;
 }
 
 .hr {
-  border: 0.5px solid #333333;
+  border: 0.5px solid #cccccc;
   margin: 15px 0;
 }
 
 .video-description {
   font-size: 14px;
-  color: #d1d1d1;
+  color: #000000; /* Confirmed black color */
   line-height: 1.6;
 }
+/* ...existing styles... */
+
+.action-button:disabled {
+  color: #cccccc;
+  cursor: not-allowed;
+}
+

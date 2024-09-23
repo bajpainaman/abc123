@@ -1,54 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { auth } from './Firebase';
-import { onAuthStateChanged } from "firebase/auth";
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+// App.js
 
-import MainApp from './components/MainApp';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
-import UploadPage from './components/UploadPage'; // Import the new UploadPage component
+import MainApp from './components/MainApp';
+import ProfileForm from './components/ProfileForm';
 
 function App() {
-  const [user, setUser] = useState(null); // Track authenticated user
-
-  // Check user authentication state on mount
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
   return (
     <Router>
       <Routes>
-        {/* Protected routes */}
-        <Route
-          path="/"
-          element={
-            user ? <MainApp user={user} /> : <Navigate to="/login" />
-          }
-        />
-        <Route
-          path="/upload"
-          element={
-            user ? <UploadPage user={user} /> : <Navigate to="/login" />
-          }
-        />
-        {/* Public route */}
-        <Route
-          path="/login"
-          element={
-            user ? <Navigate to="/" /> : <LoginPage />
-          }
-        />
-        {/* Redirect unknown routes to home or login */}
-        <Route
-          path="*"
-          element={
-            user ? <Navigate to="/" /> : <Navigate to="/login" />
-          }
-        />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/main" element={<MainApp />} />
+        <Route path="/profile" element={<ProfileForm />} />
+        
       </Routes>
     </Router>
   );
